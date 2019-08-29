@@ -2,8 +2,12 @@
     include_once'dbconnection/connection.php';
 ?>
 <?php
-    $query="SELECT * FROM applicant ORDER BY id";
-    $result=mysqli_query($conn,$query);
+    $query = "SELECT *
+    FROM score_table  INNER JOIN applicant ON score_table.applicant_id=applicant.id WHERE score_table.score = 1";
+
+    $result = mysqli_query($conn,$query);
+
+   
 ?>
 <!DOCTYPE html>
 <html>
@@ -151,6 +155,27 @@
                             </span>
                         </a>
                     </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-user"></i> <span>Judges</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="data.php"><i class="fa fa-circle-o"></i>Boss Namo</a></li>
+                            <li><a href="data.php"><i class="fa fa-circle-o"></i>Ekene</a></li>
+                            <li><a href="data.php"><i class="fa fa-circle-o"></i>Michael</a></li>
+                            <li><a href="data.php"><i class="fa fa-circle-o"></i>Nnamdi</a></li>
+                            <li><a href="data.php"><i class="fa fa-circle-o"></i>Ekuma</a></li>
+                            <li><a href="data.php"><i class="fa fa-circle-o"></i>Uche</a></li>
+                            <li><a href="data.php"><i class="fa fa-circle-o"></i>Osita</a></li>
+
+
+                        </ul>
+                    </li>
+
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -194,7 +219,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                            $judge = $_GET['judge'];
+                           
                 while($row=mysqli_fetch_array($result))
                     {
 
@@ -205,7 +230,7 @@
                         <td><?php echo $row['StartUp_name'];?></td>
                         <td><?php echo $row['current_users'];?></td>
                         <td>
-                        <a target="_blank" href="view_detail.php?id=<?php echo $row['id'];?>&judge= <?php echo $judge;?>"
+                        <a target="_blank" href="view_detail.php?id=<?php echo $row['id'];?>"
                                 class="btn btn-info">View</a>
                         </td>
                     </tr>

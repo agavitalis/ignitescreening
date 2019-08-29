@@ -1,6 +1,7 @@
 <?php
     include_once'dbconnection/connection.php';
 ?>
+
 <?php
         if(!isset($_GET['view'])){
           $id = $_GET['id'];
@@ -53,7 +54,7 @@
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="../index.php" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>G</b>Ig</span>
                 <!-- logo for regular state and mobile devices -->
@@ -157,27 +158,6 @@
                             </span>
                         </a>
                     </li>
-
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-user"></i> <span>Judges</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="data.php"><i class="fa fa-circle-o"></i>Boss Namo</a></li>
-                            <li><a href="data.php"><i class="fa fa-circle-o"></i>Ekene</a></li>
-                            <li><a href="data.php"><i class="fa fa-circle-o"></i>Michael</a></li>
-                            <li><a href="data.php"><i class="fa fa-circle-o"></i>Nnamdi</a></li>
-                            <li><a href="data.php"><i class="fa fa-circle-o"></i>Ekuma</a></li>
-                            <li><a href="data.php"><i class="fa fa-circle-o"></i>Uche</a></li>
-                            <li><a href="data.php"><i class="fa fa-circle-o"></i>Osita</a></li>
-
-
-                        </ul>
-                    </li>
-
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -221,7 +201,7 @@
                                 <div class="item">
                                     <div class="attachment">
                                       
-                                        <h4><?php echo $rows["business_uniqueness"]; ?></h4>
+                                        <h4><?php echo $rows["Business_uniqueness"]; ?></h4>
                                     </div>
                                     <!-- /.attachment -->
                                 </div>
@@ -241,7 +221,7 @@
                                 <!-- chat item -->
                                 <div class="item">
                                     <div class="attachment">
-                                        <h4><?php echo $rows["business_details"]; ?></h4>
+                                        <h4><?php echo $rows["Business_details"]; ?></h4>
                                     </div>
                                     <!-- /.attachment -->
                                 </div>
@@ -344,7 +324,7 @@
                                 <div class="item">
                                     <div class="attachment">
                                       
-                                    <h4><?php echo $rows["team_size"]; ?></h4>
+                                    <h4><?php echo $rows["Team_size"]; ?></h4>
                                     </div>
                                     <!-- /.attachment -->
                                 </div>
@@ -404,7 +384,7 @@
                                 <div class="item">
                                     <div class="attachment">
                                       
-                                    <h4><?php echo $rows["business_stage"]; ?></h4>
+                                    <h4><?php echo $rows["Business_stage"]; ?></h4>
                                     </div>
                                     <!-- /.attachment -->
                                 </div>
@@ -584,23 +564,28 @@
                                 <div class="item">
                                     <div class="attachment">
                                       
-                                    <h4><?php echo $rows["have_you_read_t&c"]; ?></h4>
+                                    <h4><?php echo $rows["have_you_read_T&C"]; ?></h4>
                                     </div>
                                     <!-- /.attachment -->
                                 </div>
                                 <!-- /.item -->
                             </div>
                         </div>
-
-
-
                         <!-- Rating form -->
                         <form method="POST" action="process_grade.php">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">SCORE</label>
-                                <input type="text" class="form-control" name="rating" />
+                               
+                                <select name="rating" id="" class="form-control" required>
+                                    <option value="">Select Grade</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="1">2</option>
+                                </select>
+                                <input type="hidden" name="id" value="<?php echo $rows['id']; ?>"/>
+                                <input type="hidden" name="judge" value="<?php echo $_GET['judge']; ?>"/>
                             </div>
-                            <button type="submit" class="btn btn-outline-success">Submit My Grade</button>
+                            <button type="submit" name="submit" class="btn btn-outline-success">Submit My Grade</button>
                         </form>
                         <!-- </Rating form> -->
                     </section>

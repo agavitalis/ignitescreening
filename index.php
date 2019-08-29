@@ -1,3 +1,10 @@
+<?php
+  include_once'pages/dbconnection/connection.php';
+?>
+<?php
+  $query="SELECT * FROM judges ORDER BY id";
+  $result=mysqli_query($conn,$query);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +71,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>G</b>Ig</span>
       <!-- logo for regular state and mobile devices -->
@@ -233,7 +240,6 @@
             </span>
           </a>
         </li>
-        
         <li class="treeview">
           <a href="#">
             <i class="fa fa-user"></i> <span>Judges</span>
@@ -242,17 +248,25 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/applicants.php"><i class="fa fa-circle-o"></i>Boss Namo</a></li>
-            <li><a href="pages/applicants.php"><i class="fa fa-circle-o"></i>Ekene</a></li>
-            <li><a href="pages/applicants.php"><i class="fa fa-circle-o"></i>Michael</a></li>
-            <li><a href="pages/applicants.php"><i class="fa fa-circle-o"></i>Nnamdi</a></li>
-            <li><a href="pages/applicants.php"><i class="fa fa-circle-o"></i>Ekuma</a></li>
-            <li><a href="pages/applicants.php"><i class="fa fa-circle-o"></i>Uche</a></li>
-            <li><a href="pages/applicants.php"><i class="fa fa-circle-o"></i>Osita</a></li>
-            
+          <?php
+                while($row=mysqli_fetch_array($result))
+                    {
 
+            ?>
+            <li>
+              <a href="pages/applicants.php?judge=<?php echo $row['id']?>"><i class="fa fa-circle-o"></i><?php echo $row['Name'];?></a>
+          
+          </li>
+            <?php
+                    }
+            ?>
           </ul>
         </li>
+        <li>
+          <a href="pages/scoresheet.php">
+              <i class="fa fa-book"></i> <span>ScoreSheet</span>
+          </a>
+      </li>
       </ul>
     </section>
     <!-- /.sidebar -->
