@@ -3,7 +3,7 @@
 ?>
 <?php
     $query = "SELECT *
-    FROM score_table  INNER JOIN applicant ON score_table.applicant_id=applicant.id WHERE score_table.score = 2";
+    FROM score_table  INNER JOIN applicant ON score_table.applicant_id=applicant.id WHERE score_table.score = 1";
 
     $result = mysqli_query($conn,$query);
 
