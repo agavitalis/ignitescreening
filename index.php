@@ -251,7 +251,6 @@
           <?php
                 while($row=mysqli_fetch_array($result))
                     {
-
             ?>
             <li>
               <a href="pages/applicants.php?judge=<?php echo $row['id']?>"><i class="fa fa-circle-o"></i><?php echo $row['Name'];?></a>
@@ -262,11 +261,30 @@
             ?>
           </ul>
         </li>
-        <li>
-          <a href="pages/scoresheet.php">
-              <i class="fa fa-book"></i> <span>ScoreSheet</span>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>ScoreSheet</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
-      </li>
+          <ul class="treeview-menu">
+            <li>
+              <a href="pages/score_0.php">
+                  <i class="fa fa-book"></i> <span>Failed</span>
+              </a>
+            </li>
+            <li>
+              <a href="pages/score_1.php">
+                  <i class="fa fa-book"></i> <span>Average</span>
+              </a>
+            </li>
+            <li>
+              <a href="pages/score_sheet.php">
+                  <i class="fa fa-book"></i> <span>Very Good</span>
+              </a>
+            </li>
+          </ul>
       </ul>
     </section>
     <!-- /.sidebar -->
