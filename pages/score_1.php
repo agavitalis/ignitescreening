@@ -3,7 +3,7 @@
     include_once'include/connection.php';
 
     $query = "SELECT *
-    FROM score_table  INNER JOIN applicant ON score_table.applicant_id=applicant.id WHERE score_table.score = 1";
+    FROM score_table  INNER JOIN applicant ON score_table.applicant_id=applicant.id INNER JOIN judges ON score_table.judge_id=judges.id WHERE score_table.score = 1";
 
     $result = mysqli_query($conn,$query);
 
@@ -87,8 +87,9 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Email</th>
-                                            <th>StartUp Name</th>
+                                            <th>Startup Name</th>
                                             <th>Current Users</th>
+                                            <th>Judge</th>
                                             <th>View</th>
 
                                         </tr>
@@ -105,6 +106,7 @@
                         <td><?php echo $row['email'];?></td>
                         <td><?php echo $row['startup_name'];?></td>
                         <td><?php echo $row['current_users'];?></td>
+                        <td><?php echo $row['name'];?></td>
                         <td>
                         <a  href="view_detail.php?id=<?php echo $row['id'];?>"
                                 class="btn btn-info">View</a>
