@@ -1,7 +1,18 @@
 <?php
-    include_once'dbconnection/connection.php';
-?>
-<?php
+    
+    include_once'include/session.php';
+    include_once'include/connection.php';
+
+    if(isset($_GET['judge']) && isset($_GET['judge_name']) ){
+
+        $_SESSION["judge"] = $_GET['judge'];
+        $judge_id = $_SESSION["judge"]; 
+
+        $_SESSION["judge_name"] = $_GET['judge_name'];
+        $judge_name = $_SESSION["judge_name"]; 
+
+    }
+
     $query="SELECT * FROM applicant ORDER BY id";
     $result=mysqli_query($conn,$query);
 ?>
@@ -45,116 +56,13 @@
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
 
-        <header class="main-header">
-            <!-- Logo -->
-            <a href="../index.php" class="logo">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>G</b>Ig</span>
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Genesys</b>IGN</span>
-            </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-                        <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-envelope-o"></i>
-                                <span class="label label-success">4</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">No messages</li>
-
-                                <li class="footer"><a href="#">No Messages</a></li>
-                            </ul>
-                        </li>
-                        <!-- Notifications: style can be found in dropdown.less -->
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Genesys Admin</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header">
-                                    <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                                    <p>
-                                        Genesys Admin - Genesys Staff
-                                        <small>How are you doing?</small>
-                                    </p>
-                                </li>
-
-                        </li>
-                        <!-- Menu Footer-->
-                        <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
-                            </div>
-                            <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                            </div>
-                        </li>
-                    </ul>
-                    </li>
-                    <!-- Control Sidebar Toggle Button -->
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+        <?php
+            include('include/header.php');
+        ?>
         <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- Sidebar user panel -->
-                <div class="user-panel">
-                    <div class="pull-left image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                    </div>
-                    <div class="pull-left info">
-                        <p>Genesys Admin</p>
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                    </div>
-                </div>
-                <!-- search form -->
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i
-                                    class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-                <!-- /.search form -->
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu" data-widget="tree">
-                    <li>
-                        <a href="/">
-                            <i class="fa fa-th"></i> <span>Dashboard</span>
-                            <span class="pull-right-container">
-                                <small class="label pull-right bg-green">hot</small>
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-            </section>
-            <!-- /.sidebar -->
-        </aside>
+        <?php
+            include('include/sidebar.php');
+        ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -170,7 +78,7 @@
                     <li class="active">Applicants</li>
                 </ol>
             </section>
-
+            <?php include('include/alert.php') ?>
             <!-- Main content -->
             <section class="content">
                 <div class="row">
@@ -193,26 +101,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-                            $judge = $_GET['judge'];
-                            $row=mysqli_fetch_array($result);
-                while($row=mysqli_fetch_array($result))
-                    {
+                                <?php
+                                    
+                                    $row=mysqli_fetch_array($result);
+                                    while($row=mysqli_fetch_array($result))
+                                {
 
-            ?>
-                    <tr>
-                        <td><?php echo $row['id'];?></td>
-                        <td><?php echo $row['email'];?></td>
-                        <td><?php echo $row['StartUp_name'];?></td>
-                        <td><?php echo $row['current_users'];?></td>
-                        <td>
-                        <a target="_blank" href="view_detail.php?id=<?php echo $row['id'];?>&judge= <?php echo $judge;?>"
-                                class="btn btn-info">View</a>
-                        </td>
-                    </tr>
-                    <?php
-                    }
-            ?>
+                                 ?>
+                                        <tr>
+                                            <td><?php echo $row['id'];?></td>
+                                            <td><?php echo $row['email'];?></td>
+                                            <td><?php echo $row['startup_name'];?></td>
+                                            <td><?php echo $row['current_users'];?></td>
+                                            <td>
+                                                <a
+                                                    href="view_detail.php?id=<?php echo $row['id'];?>&judge= <?php echo $judge_id;?>"
+                                                    class="btn btn-info">View</a>
+                                            </td>
+                                        </tr>
+                                 <?php
+                                 }
+                                 ?>
                                     </tbody>
                                 </table>
                             </div>

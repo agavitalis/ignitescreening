@@ -1,5 +1,5 @@
 <?php
-  include_once'pages/dbconnection/connection.php';
+  include_once'pages/include/connection.php';
 ?>
 <?php
   $query="SELECT * FROM judges ORDER BY id";
@@ -233,7 +233,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li>
-          <a href="/">
+          <a href="index.php">
             <i class="fa fa-th"></i> <span>Dashboard</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">hot</small>
@@ -253,7 +253,7 @@
                     {
             ?>
             <li>
-              <a href="pages/applicants.php?judge=<?php echo $row['id']?>"><i class="fa fa-circle-o"></i><?php echo $row['Name'];?></a>
+              <a href="pages/applicants.php?judge=<?php echo $row['id']?>&judge_name=<?php echo $row['name']?>"><i class="fa fa-circle-o"></i><?php echo $row['name'];?></a>
           
           </li>
             <?php
