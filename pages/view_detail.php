@@ -476,7 +476,7 @@
                                     <option value="">Select Grade</option>
                                     <option value="0">0</option>
                                     <option value="1">1</option>
-                                    <option value="1">2</option>
+                                    <option value="2">2</option>
                                 </select>
                                 <input type="hidden" name="id" value="<?php echo $rows['id']; ?>"/>
                                 <input type="hidden" name="judge" value="<?php echo $_GET['judge']; ?>"/>
